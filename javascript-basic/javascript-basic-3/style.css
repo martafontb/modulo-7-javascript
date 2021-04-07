@@ -29,6 +29,7 @@ html {
     height: 70px;
     line-height: 70px;
     padding: 16px 8px;
+    font-size: 32px;
     /* background-color: var(--green); */
     border-color: var(--red);
 }
