@@ -23,10 +23,7 @@ html, body {
    grid-template-columns: 1fr 1fr;
 }
 
-
-.nom,
-.vocals,
-.complet {
+.d-none {
     display: none;
     padding: 0.5em;
 }
