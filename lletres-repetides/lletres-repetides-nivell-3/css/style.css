@@ -1,0 +1,37 @@
+html, body {
+    font-family: 'Satoshi', sans-serif;
+    font-weight:300;
+    font-size: 27.2873px;
+    line-height: 30px;
+
+    margin: 0;
+    padding: 0;
+    background: #a69c9c;   
+    height:100vh; 
+ 
+}
+
+.container {
+    margin: 1em auto;
+    height:100%;
+    width: 90%;
+    overflow: hidden;
+}
+
+.exercicis {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+}
+
+
+.nom,
+.vocals,
+.complet {
+    display: none;
+    padding: 0.5em;
+}
+
+button {
+    font-size: 30.4976px;
+    line-height: 30px;
+}

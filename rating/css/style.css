@@ -1,0 +1,38 @@
+:root {
+  --base:#ff8ba7;
+  --background:#faeee7;
+  --hover: #33272a;
+}
+
+body,html {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background:var(--background);
+  }
+
+
+  .cursors {
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+    margin:auto;
+    transition: all 0.3s ease;
+  }
+  
+  .cursor-icon {
+    fill: var(--base);
+    transition: all 0.5s ease;
+    opacity: 1;  
+  }
+
+  .hovered {
+    fill: var(--hover);
+  }
+  
+  .cursors:hover > .cursor-icon {
+    fill: #c3f0ca;
+  }
