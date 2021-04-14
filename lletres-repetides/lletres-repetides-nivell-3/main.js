@@ -91,3 +91,10 @@ function resultatEmail() {
   const toggle5 = html5.style.display;
   toggle5 == 'block' ? html5.style.display = 'none': html5.style.display = 'block';
 }
+
+
+// const buttons = document.querySelectorAll('button.accent');
+// const divToggle = document.query
+// function toggleOpen() {
+  
+// }

@@ -1,0 +1,47 @@
+@use './resets';
+
+$font-family-sans-serif: 'General Sans', sans-serif;
+
+// $primary:       #001858;
+// $secondary:     #f3d2c1;
+// $success:       #8bd3dd;
+// $info:          #fef6e4;
+// $warning:       #fdabcb;
+// $danger:        #f582ae;
+// $light:         #fef6e4;
+// $dark:          #001858;
+// $text-muted:    #8bd3dd;
+
+body {
+    margin:0;
+    padding:0;
+    width: 100vw;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+#header,
+#main {
+    margin:0;
+    max-width: 100vw;
+    padding:0;
+}
+
+#main {
+    height: 90vh;
+        div.carousel-container{
+            height: 90vh;
+            }
+        }
+.carousel {
+     height:100%;
+    }
+.carousel-inner {
+    height:100%;  
+    }
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
