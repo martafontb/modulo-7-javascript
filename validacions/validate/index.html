@@ -62,7 +62,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form id="login" novalidate>
+                          <form class="needs-validation" id="login" novalidate>
                             <div class="mb-3">
                               <label for="email1" class="form-label">Email address</label>
                               <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
@@ -99,20 +99,20 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form class="needs-validation" id="signup" onsubmit="return results();" novalidate>
+                          <form id="signup">
                             <div class="mb-3">
                               <label for="inputName" class="form-label">First Name</label>
-                              <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp" required>
+                              <input type="text" class="form-control" id="inputName" placeholder="Enter your first name" aria-describedby="nameHelp" required>
                               <div class="invalid-feedback" id="errorName"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputSurname" class="form-label">Surname</label>
-                              <input type="text" class="form-control" id="inputSurname" aria-describedby="surnameHelp" required>
+                              <input type="text" class="form-control" id="inputSurname" placeholder="Enter your surname" aria-describedby="surnameHelp" required>
                               <div class="invalid-feedback" id="errorSurname"></div>
                             </div>
                             <div class="mb-3">
                               <label for="email-a" class="form-label">Email address</label>
-                              <input type="email" class="form-control" id="email-a" aria-describedby="emailHelp" required>
+                              <input type="email" class="form-control" id="email-a" placeholder="Enter your email address" aria-describedby="emailHelp" required>
                               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                               <div class="invalid-feedback" id="errorEmailA"></div>
                             </div>
@@ -135,18 +135,18 @@
                             <div class="invalid-feedback" id="errorPasswordB"></div>
 
                             <div class="mb-3">
-                              <label for="form-select" class="form-label">Age</label>
-                              <select class="form-select" required aria-label="select example" id="age">
-                                <option value="">Select an age range</option>
-                                <option value="1">16-24</option>
-                                <option value="2">24-36</option>
-                                <option value="3">36-48</option>
-                                <option value="3">48-56+</option>
+                              <label for="form-select" class="form-label">Language</label>
+                              <select class="form-select" required aria-label="select example" id="language">
+                                <option value="">Select an language</option>
+                                <option value="1">English</option>
+                                <option value="2">French</option>
+                                <option value="3">Italian</option>
+                                <option value="3">Spanish</option>
                               </select>
-                              <div class="invalid-feedback" id="errorAge"></div>
+                              <div class="invalid-feedback" id="errorLanguage"></div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Submit</button> 
+                            <button type="submit" class="btn btn-primary" id="btn">Submit</button> 
                           </form>
                         </div>
                         <div class="modal-footer">
@@ -163,14 +163,14 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Thanks for signing up</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Thanks for registering</h5>
                             </div>
                             <div class="modal-body">
                                 ...
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
-                                <button type="button" class="btn btn-primary">Confirm data</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signIn" >Log in</button>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 const form2 = document.getElementById("signup");
+const arrayTemp = []
 
 function registerValidate() {
 	var acumErrores = 0;
@@ -10,7 +11,7 @@ function registerValidate() {
     const emailA = document.getElementById("email-a");
     const passwordA = document.getElementById("password-a");
     const passwordB = document.getElementById("password-b");
-    const age = document.getElementById("age");
+    const lanage = document.getElementById("lanage");
 
     if(name.value == "") {
 		name.classList.add("is-invalid");
@@ -40,7 +41,7 @@ function registerValidate() {
         acumErrores ++;
     } else if(!validar_password(passwordA.value)){
         console.log('hello')
-        errorPasswordA.classList.add("is-invalid");
+        passwordA.classList.add("is-invalid");
         document.getElementById("errorPasswordA").innerText = "password doesn't match requirements";
         acumErrores ++;
     }
@@ -51,9 +52,9 @@ function registerValidate() {
         acumErrores ++;
     }
 
-    if(age.value == "") {
-		age.classList.add("is-invalid");
-		document.getElementById("errorAge").textContent = "this field is required";
+    if(language.value == "") {
+		language.classList.add("is-invalid");
+		document.getElementById("errorLanguage").textContent = "this field is required";
 		acumErrores ++;
 	}
 
@@ -63,43 +64,6 @@ function registerValidate() {
     }else{
 		return true;
     }
-}
-
-function openModal() {
-    document.getElementById("backdrop").style.display = "block"
-    document.getElementById("exampleModal").style.display = "block"
-    document.getElementById("exampleModal").className += "show"
-}
-function closeModal() {
-    document.getElementById("backdrop").style.display = "none"
-    document.getElementById("exampleModal").style.display = "none"
-    document.getElementById("exampleModal").className += document.getElementById("exampleModal").className.replace("show", "")
-}
-// Get the modal
-const modal = document.getElementById('exampleModal');
-window.onclick = function (event) {
-    if (event.target == modal) {
-        closeModal()
-    }
-}
-
-form2.addEventListener('submit', (event) => {
-	console.log(event);
-	if (event.target.value!='') 
-        event.target.classList.remove('is-invalid');
-        registerValidate();
-
-}, true);
-
-function results() {
-    const name = document.getElementById("inputName").value;
-    const surname = document.getElementById("inputSurname").value;
-    const modal = document.getElementById('exampleModal');
-    const modalBody = modal.querySelector('.modal-body');
-
-    modalBody.innerHTML = `name: ${name} <br/> surname: ${surname}`
-    
-    openModal();
 }
 
 function validar_email(email) {
@@ -116,26 +80,75 @@ function password_match(input1,input2) {
     input1.value === input2.value ? true : false;
 }
 
+let users = [];
+const addUser = function() {
+    let user = {
+        name: document.getElementById('inputName').value,
+        surname: document.getElementById('inputSurname').value,
+        email: document.getElementById('email-a').value,
+        language: document.getElementById('language').value,
+    }
+//check if email is valid
+users.push(user);
+document.getElementById('signup').reset(); // to clear the form for the next entires
+
+console.warn('added', {users});
+
+//saving to localStorage
+localStorage.setItem('Registered', JSON.stringify(users))
+}
+
+const openModal = function() {
+    document.getElementById("backdrop").style.display = "block"
+    document.getElementById("exampleModal").style.display = "block"
+    document.getElementById("exampleModal").className += "show"
+}
+
+function closeModal() {
+    document.getElementById("backdrop").style.display = "none"
+    document.getElementById("exampleModal").style.display = "none"
+    document.getElementById("exampleModal").className += document.getElementById("exampleModal").className.replace("show", "")
+}
+// Get the modal
+const modal = document.getElementById('exampleModal');
+window.onclick = function (event) {
+    if (event.target == modal) {
+        closeModal()
+    }
+}
+
+function results() {
+    const name = document.getElementById("inputName").value;
+    const surname = document.getElementById("inputSurname").value;
+    const modal = document.getElementById('exampleModal');
+    const modalBody = modal.querySelector('.modal-body');
+
+    modalBody.innerHTML = `Thanks! ${name} ${surname}`
+    
+    openModal();
+}
 
 
-// starter JavaScript for disabling form submissions if there are invalid fields
-// (function () {
-//     'use strict'
-  
-//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-//     var forms = document.querySelectorAll('.needs-validation')
-  
-//     // Loop over them and prevent submission
-//     Array.prototype.slice.call(forms)
-//       .forEach(function (form) {
-//         form.addEventListener('submit', function (event) {
+  form2.addEventListener('submit', (event) => {
+    event.preventDefault();
+    console.log(event);
+	if (event.target.value == '') 
+    {    
+        console.log(event.target.value)
+        registerValidate();   
         
-//           if (!form.checkValidity()) {
-//             event.preventDefault()
-//             event.stopPropagation()
-//           }
-//           form.classList.add('was-validated')
-       
-//         }, false)
-//       })
-//   })()
+
+    } else  {
+        registerValidate();
+        event.target.classList.remove('is-invalid');   
+        addUser();
+        openModal();
+        //gruardar en el array los elementos
+        
+        //lanzar modal - Thanks for registering
+
+        // si esta bien rellenado 
+        // cuando se cierra el primer registro -> login 
+    }
+}, true);
+

@@ -1,38 +1,53 @@
-:root {
-  --base:#ff8ba7;
-  --background:#faeee7;
-  --hover: #33272a;
-}
-
 body,html {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-    background:var(--background);
-  }
-
-
-  .cursors {
+    background:#fcf7f4;
+    height: 100vh;
     display: flex;
-    flex: 1;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: space-around;
-    width: 70%;
-    margin:auto;
-    transition: all 0.3s ease;
-  }
-  
-  .cursor-icon {
-    fill: var(--base);
-    transition: all 0.5s ease;
-    opacity: 1;  
+    justify-content: center;
   }
 
-  .hovered {
-    fill: var(--hover);
-  }
+
+.rating {
+    direction: rtl;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+ }
   
-  .cursors:hover > .cursor-icon {
-    fill: #c3f0ca;
-  }
+span {
+  font-size: 4em;
+  display: inline-block;
+  position: relative;
+  color:rgb(255, 119, 7);
+  cursor:pointer;
+  padding: 1em;
+  transition: color 0.5s ease;
+}
+
+span:hover,
+
+span:hover ~ span {
+  color: transparent;
+}
+
+span:hover:before,
+span:hover ~ span:before {
+   content: "\263B";
+   position: absolute;
+   left: 1em; 
+   color:rgb(255, 119, 7);
+}
+
+span.active,
+span.active ~ span {
+  color: transparent;
+}
+
+span.active:before ,
+span.active ~ span:before {
+   content: "\263B";
+   position: absolute;
+   left: 1em; 
+   color: rgb(255, 0, 212);
+}
