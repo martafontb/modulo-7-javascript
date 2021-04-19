@@ -3,15 +3,14 @@ const arrayTemp = []
 
 function registerValidate() {
 	var acumErrores = 0;
-	
 	form.classList.remove('is-invalid');
 
     const name = document.getElementById("inputName");
     const surname = document.getElementById("inputSurname");
-    const emailA = document.getElementById("email-a");
-    const passwordA = document.getElementById("password-a");
-    const passwordB = document.getElementById("password-b");
-    const lanage = document.getElementById("lanage");
+    const email = document.getElementById("inputEmail");
+    const pass = document.getElementById("inputPass");
+    const passVal = document.getElementById("inputPassVal");
+    const language = document.getElementById("inputLanguage");
 
     if(name.value == "") {
 		name.classList.add("is-invalid");
@@ -25,29 +24,29 @@ function registerValidate() {
 		acumErrores ++;
 	}
 
-    if(emailA.value == "") {
-        emailA.classList.add("is-invalid");
-        document.getElementById("errorEmailA").innerText = "this field is required";
+    if(email.value == "") {
+        email.classList.add("is-invalid");
+        document.getElementById("errorEmail").innerText = "this field is required";
         acumErrores ++;
     }else if(!validar_email(emailA.value)){
-        emailA.classList.add("is-invalid");
-        document.getElementById("errorEmailA").innerText = "Email is not valid";
+        email.classList.add("is-invalid");
+        document.getElementById("errorEmail").innerText = "Email is not valid";
         acumErrores ++;
     }
     
-    if(passwordA.value == "") {
-        passwordA.classList.add("is-invalid");
+    if(pass.value == "") {
+        pass.classList.add("is-invalid");
         document.getElementById("errorPasswordA").innerText = "this field is required";
         acumErrores ++;
-    } else if(!validar_password(passwordA.value)){
+    } else if(!validar_password(pass.value)){
         console.log('hello')
-        passwordA.classList.add("is-invalid");
+        pass.classList.add("is-invalid");
         document.getElementById("errorPasswordA").innerText = "password doesn't match requirements";
         acumErrores ++;
     }
 
-    if(!validar_password(passwordA.value, passwordB.value)) {
-        passwordB.classList.add("is-invalid");
+    if(!validar_password(pass.value, passVal.value)) {
+        passVal.classList.add("is-invalid");
         document.getElementById("errorPasswordB").innerText = "password doesn't match";
         acumErrores ++;
     }
@@ -85,13 +84,12 @@ const addUser = function() {
     let user = {
         name: document.getElementById('inputName').value,
         surname: document.getElementById('inputSurname').value,
-        email: document.getElementById('email-a').value,
-        language: document.getElementById('language').value,
+        email: document.getElementById('inputEmail').value,
+        language: document.getElementById('inputlanguage').value,
     }
 //check if email is valid
 users.push(user);
 document.getElementById('signup').reset(); // to clear the form for the next entires
-
 console.warn('added', {users});
 
 //saving to localStorage

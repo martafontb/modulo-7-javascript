@@ -12,7 +12,7 @@ function loginValidate() {
         email.classList.add("is-invalid");
         document.getElementById("errorEmail").innerText = "this field is required";
         acumErrores ++;
-    }else if(!validar_email(email.value)){
+    }else if(!CheckEmail(email.value)){
         email.classList.add("is-invalid");
         document.getElementById("errorEmail").innerText = "Email is not valid";
         acumErrores ++;
@@ -22,7 +22,7 @@ function loginValidate() {
         password.classList.add("is-invalid");
         document.getElementById("errorPassword").innerText = "this field is required";
         acumErrores ++;
-    } else if(!validar_password(password.value)){
+    } else if(!CheckPassword(password.value)){
         console.log('hello')
         password.classList.add("is-invalid");
         document.getElementById("errorPassword").innerText = "password doesn't match requirements";
@@ -35,14 +35,17 @@ function loginValidate() {
     }
 }
 
+function ShowError(input, message) {
+
+}
 
 
-function validar_email(email) {
+function CheckEmail(email) {
 	var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	return regex.test(email) ? true : false;
 }
 
-function validar_password(password) {
+function CheckPassword(password) {
     var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
     return regex.test(password) ? true: false;
 }

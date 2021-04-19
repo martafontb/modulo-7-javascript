@@ -62,7 +62,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form class="needs-validation" id="login" novalidate>
+                          <form class="needs-validation" id="login">
                             <div class="mb-3">
                               <label for="email1" class="form-label">Email address</label>
                               <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
@@ -102,41 +102,41 @@
                           <form id="signup">
                             <div class="mb-3">
                               <label for="inputName" class="form-label">First Name</label>
-                              <input type="text" class="form-control" id="inputName" placeholder="Enter your first name" aria-describedby="nameHelp" required>
+                              <input type="text" class="form-control" id="inputName" placeholder="Enter your first name" aria-describedby="nameHelp">
                               <div class="invalid-feedback" id="errorName"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputSurname" class="form-label">Surname</label>
-                              <input type="text" class="form-control" id="inputSurname" placeholder="Enter your surname" aria-describedby="surnameHelp" required>
+                              <input type="text" class="form-control" id="inputSurname" placeholder="Enter your surname" aria-describedby="surnameHelp">
                               <div class="invalid-feedback" id="errorSurname"></div>
                             </div>
                             <div class="mb-3">
-                              <label for="email-a" class="form-label">Email address</label>
-                              <input type="email" class="form-control" id="email-a" placeholder="Enter your email address" aria-describedby="emailHelp" required>
+                              <label for="inputEmail" class="form-label">Email address</label>
+                              <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email address" aria-describedby="emailHelp">
                               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                              <div class="invalid-feedback" id="errorEmailA"></div>
+                              <div class="invalid-feedback" id="errorEmail"></div>
                             </div>
                             <div class="mb-3">
-                              <label for="password-a" class="form-label">Password</label>
-                              <input type="password" id="password-a" class="form-control" aria-describedby="passwordHelpBlock" required>
+                              <label for="inputPass" class="form-label">Password</label>
+                              <input type="password" id="inputPass" class="form-control" aria-describedby="passwordHelpBlock">
                               <div id="passwordHelpBlock" class="form-text">
                                 Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                               </div>
                               <div class="invalid-feedback" id="errorPasswordA"></div>
                             </div>
                             <div class="mb-3">
-                              <label for="password-b" control-label class="form-label"> Confirm password</label>
+                              <label for="inputPassVal" control-label class="form-label"> Confirm password</label>
                                   <input type="password" class="form-control" name="confirmPassword"
-                                      id="password-b"
+                                      id="inputPassVal"
                                       data-bv-identical="true"
                                       data-bv-identical-field="password"
-                                      data-bv-identical-message="The password and its confirm are not the same" required/>
+                                      data-bv-identical-message="The password and its confirm are not the same"/>
                             </div>
                             <div class="invalid-feedback" id="errorPasswordB"></div>
 
                             <div class="mb-3">
                               <label for="form-select" class="form-label">Language</label>
-                              <select class="form-select" required aria-label="select example" id="language">
+                              <select class="form-select" aria-label="select example" id="inputLanguage">
                                 <option value="">Select an language</option>
                                 <option value="1">English</option>
                                 <option value="2">French</option>
@@ -146,7 +146,7 @@
                               <div class="invalid-feedback" id="errorLanguage"></div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" id="btn">Submit</button> 
+                            <button type="submit" class="btn btn-primary" id="btnSend">Submit</button> 
                           </form>
                         </div>
                         <div class="modal-footer">
@@ -238,7 +238,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="validate-login.js"></script>
-    <script src="validate-signup.js"></script>
+    <!-- <script src="validate-login.js"></script> -->
+    <script src="custom.js"></script>
+    <!-- <script src="validate-signup.js"></script> -->
   </body>
 </html>

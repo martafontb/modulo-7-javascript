@@ -9,30 +9,12 @@
 </head>
 <body>
     <div class="rating">
-        <span>☺</span><span>☺</span><span>☺</span><span>☺</span><span>☺</span>
+        <span id="item1">☺</span>
+        <span id="item2">☺</span>
+        <span id="item3">☺</span>
+        <span id="item4">☺</span>
+        <span id="item5">☺</span>
     </div>
-    <script>
-        const container = document.querySelector('.rating')
-        const items = container.querySelectorAll('span')
-
-        items.forEach((item) => { 
-            item.addEventListener('click', function(e) {
-                const elementClass = e.target.classList
-                    if(!elementClass.contains('active')) {
-                    items.forEach( item => item.classList.remove('active'))   
-                    elementClass.toggle('active');
-                }
-            })
-
-        })
-
-        // window.addEventListener ('click', function(e) {
-        //     console.log(e.target)
-        //     const event = e.target
-        //     if(items) {
-        //         items.forEach( item => item.style.backgroundColor = 'transparent')  
-        //     }
-        // })
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>
