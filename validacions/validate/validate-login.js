@@ -35,10 +35,6 @@ function loginValidate() {
     }
 }
 
-function ShowError(input, message) {
-
-}
-
 
 function CheckEmail(email) {
 	var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;

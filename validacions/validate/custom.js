@@ -1,6 +1,3 @@
-//Log in form
-const form = document.getElementById("login");
-
 //Sign up form
 const form2 = document.getElementById("signup");
 const fullName = document.getElementById("inputName");
@@ -16,8 +13,8 @@ function ShowError(input, message) {
   const formControl = input;
   console.log(formControl)
   formControl.className = "form-control  is-invalid";
-  const error = formControl.querySelectorAll('div.invalid-feedback');
-  error.innerText = message;
+  // const small = formControl.querySelector('small');
+  // small.innerText = message;
 }
 
 //Show input success
@@ -35,6 +32,7 @@ function CheckEmail(input) {
     ShowError(input, "Email is not valid");
   }
 }
+//Required
 function CheckRequired(inputErr) {
   inputErr.forEach(function(input){
     if (input.value.trim() === "") {
@@ -44,7 +42,7 @@ function CheckRequired(inputErr) {
     }
   });
 }
-
+//Length
 function CheckLenght(input, min, max) {
   if (input.value.length < min) {
     ShowError(input, `${getFieldName(input)} must be at least ${min} characters`);
@@ -54,17 +52,16 @@ function CheckLenght(input, min, max) {
     ShowSuccess(input);
   }
 }
-
+//Password Match
 function CheckPasswordsMatch(input1,input2) {
   if (input1.value !== input2.value) {
     ShowError(input2, "Password do not match");
   }
 }
 
-function getFieldName(input) {
-  return input.id.charAt(0).toUpperCase() + input.id.slice(1)
-}
 
+
+//sign up submit
 form2.addEventListener('submit', function(e){
   e.preventDefault();
 
@@ -74,4 +71,56 @@ form2.addEventListener('submit', function(e){
   CheckEmail(email);
   CheckLenght(pass, 8, 25);
   CheckPasswordsMatch(pass, pass2);
+
+  addUser();
+});
+
+//Database
+let users = [];
+const addUser = function() {
+    let user = {
+        name: document.getElementById('inputName').value,
+        surname: document.getElementById('inputSurname').value,
+        email: document.getElementById('inputEmail').value,
+        password:document.getElementById('inputPass').value,
+        language: document.getElementById('inputLanguage').value,
+    }
+//check if email is valid
+users.push(user);
+document.getElementById('signup').reset(); // to clear the form for the next entires
+console.warn('added', {users});
+
+//saving to localStorage
+localStorage.setItem('Registered', JSON.stringify(users))
+}
+
+
+// Object.keys(user);
+// Object.values(user).includes("email");
+
+//Check if email is stored in array
+function CheckUser(users, input) {
+  if (users.some(user => user === input.value)) {
+    document.write("welcome");
+  } else {
+    alert("wrong");
+  }
+}
+
+
+//Log in form
+const form = document.getElementById("login");
+const email1 = document.getElementById("email");
+const password = document.getElementById("password");
+
+//Log in submit
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+
+  CheckRequired([ email1, password ]);
+  CheckEmail(email);
+  CheckLenght(password, 8, 25);
+
+  
+  CheckUser(users, email);
 });
