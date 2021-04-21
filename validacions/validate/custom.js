@@ -10,17 +10,17 @@ const btn = document.getElementById("btnSend");
 
 //Show input error message
 function ShowError(input, message) {
-  const formControl = input;
-  console.log(formControl)
-  formControl.className = "form-control  is-invalid";
-  // const small = formControl.querySelector('small');
-  // small.innerText = message;
+  const formControl = input
+  formControl.className = "form-control is-invalid";
+
+  const errors = document.querySelectorAll('.invalid-feedback');
+  errors.forEach( error => error.innerHTML = message)
 }
 
 //Show input success
 function ShowSuccess(input) {
   const formControl = input;
-  formControl.className = "form-control  is-valid";
+  formControl.className = "form-control is-valid";
 }
 
 //Check email
@@ -28,52 +28,84 @@ function CheckEmail(input) {
   const char = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (char.test(input.value.trim())) {
     ShowSuccess(input);
+    return true;
   }else {
     ShowError(input, "Email is not valid");
   }
 }
+
 //Required
-function CheckRequired(inputErr) {
-  inputErr.forEach(function(input){
-    if (input.value.trim() === "") {
-      ShowError(input, `${getFieldName(input)} is required`);
-    }else {
-      ShowSuccess(input);
+function CheckRequired(input) {
+  input.forEach(function(el){
+    if (el.value.trim() === "") {
+      ShowError(el, `This field is required`);
+    } else {
+      ShowSuccess(el);  
+      return true;
     }
   });
 }
 //Length
 function CheckLenght(input, min, max) {
   if (input.value.length < min) {
-    ShowError(input, `${getFieldName(input)} must be at least ${min} characters`);
+    ShowError(input, `This field is required`);
   }else if(input.value.length > max){
-    ShowError(input, `${getFieldName(input)} must be less then ${max} characters`);
+    ShowError(input, `field must be less then ${max} characters`);
   }else {
     ShowSuccess(input);
+    return true;
   }
 }
 //Password Match
 function CheckPasswordsMatch(input1,input2) {
   if (input1.value !== input2.value) {
-    ShowError(input2, "Password do not match");
+    ShowError(input2, "Passwords do not match");
   }
 }
-
-
 
 //sign up submit
 form2.addEventListener('submit', function(e){
   e.preventDefault();
 
-  CheckRequired([fullName, surname, email, pass, pass2, language]);
-  CheckLenght(fullName, 3, 15);
-  CheckLenght(surname, 3, 15);
   CheckEmail(email);
   CheckLenght(pass, 8, 25);
-  CheckPasswordsMatch(pass, pass2);
-
-  addUser();
+  CheckPasswordsMatch(pass, pass2); 
+  if(CheckRequired([fullName, surname, email, pass, pass2, language]) && CheckEmail(email) && CheckPasswordsMatch(pass, pass2) ) {
+    addUser()
+  } 
+  
 });
+
+
+//modal
+const openModal = function() {
+  document.getElementById("backdrop").style.display = "block"
+  document.getElementById("exampleModal").style.display = "block"
+  document.getElementById("exampleModal").className += "show"
+}
+
+function closeModal() {
+  document.getElementById("backdrop").style.display = "none"
+  document.getElementById("exampleModal").style.display = "none"
+  document.getElementById("exampleModal").className += document.getElementById("exampleModal").className.replace("show", "")
+}
+// Get the modal
+const modal = document.getElementById('exampleModal');
+window.onclick = function (event) {
+  if (event.target == modal) {
+      closeModal()
+  }
+}
+
+function results() {
+  const modal = document.getElementById('exampleModal');
+  const modalBody = modal.querySelector('.modal-body');
+
+  modalBody.innerHTML = `Welcome`
+  
+  openModal();
+}
+
 
 //Database
 let users = [];
@@ -94,24 +126,29 @@ console.warn('added', {users});
 localStorage.setItem('Registered', JSON.stringify(users))
 }
 
-
-// Object.keys(user);
-// Object.values(user).includes("email");
-
-//Check if email is stored in array
-function CheckUser(users, input) {
-  if (users.some(user => user === input.value)) {
-    document.write("welcome");
-  } else {
-    alert("wrong");
-  }
-}
-
-
 //Log in form
 const form = document.getElementById("login");
 const email1 = document.getElementById("email");
 const password = document.getElementById("password");
+
+
+const filteredUsers = users.filter(user => {
+  let loggedInUser = email1.value
+  return user.email === loggedInUser
+})
+  
+
+console.log(filteredUsers)
+
+
+function checkFilteredUsers() {
+    if (filteredUsers) {
+      // alert('welcome');
+    } else {
+      alert("please sign up");
+    }
+}
+
 
 //Log in submit
 form.addEventListener('submit', function(e){
@@ -120,7 +157,9 @@ form.addEventListener('submit', function(e){
   CheckRequired([ email1, password ]);
   CheckEmail(email);
   CheckLenght(password, 8, 25);
-
-  
-  CheckUser(users, email);
+  checkFilteredUsers();
 });
+
+
+
+

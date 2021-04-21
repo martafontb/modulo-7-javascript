@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"> -->
 
      <link href="https://api.fontshare.com/css?f[]=general-sans@400&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="./css/custom.css">
-    
+     <link rel="stylesheet" href="./css/custom.css"> 
     <title>Hello, world!</title>
   </head>
   <body>
@@ -67,7 +66,7 @@
                               <label for="email1" class="form-label">Email address</label>
                               <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
                               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                              <small class="invalid-feedback" id="errorEmail"></small>
+                              <div class="invalid-feedback" id="errorEmail"></div>
                             </div>
                             <div class="mb-3">
                               <label for="password1" class="form-label">Password</label>
@@ -75,7 +74,7 @@
                               <div id="passwordHelpBlock" class="form-text">
                                 Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                               </div>
-                              <small class="invalid-feedback" id="errorPassword"></small>
+                              <div class="invalid-feedback" id="errorPassword"></div>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <div style="padding-top: 25px"> Not a member? <a data-bs-toggle="modal" href="#signUp" role="button">Sign up</a></div>
@@ -103,18 +102,18 @@
                             <div class="mb-3">
                               <label for="inputName" class="form-label">First Name</label>
                               <input type="text" class="form-control" id="inputName" placeholder="Enter your first name" aria-describedby="nameHelp">
-                              <small class="invalid-feedback" id="errorName"></small>
+                              <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputSurname" class="form-label">Surname</label>
                               <input type="text" class="form-control" id="inputSurname" placeholder="Enter your surname" aria-describedby="surnameHelp">
-                              <small class="invalid-feedback" id="errorSurname"></small>
+                              <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputEmail" class="form-label">Email address</label>
                               <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email address" aria-describedby="emailHelp">
                               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                              <small class="invalid-feedback" id="errorEmail"></small>
+                              <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputPass" class="form-label">Password</label>
@@ -122,7 +121,7 @@
                               <div id="passwordHelpBlock" class="form-text">
                                 Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                               </div>
-                              <small class="invalid-feedback" id="errorPasswordA"></small>
+                              <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputPassVal" control-label class="form-label"> Confirm password</label>
@@ -132,7 +131,7 @@
                                       data-bv-identical-field="password"
                                       data-bv-identical-message="The password and its confirm are not the same"/>
                             </div>
-                            <small class="invalid-feedback" id="errorPasswordB"></small>
+                            <div class="invalid-feedback"></div>
 
                             <div class="mb-3">
                               <label for="form-select" class="form-label">Language</label>
@@ -143,7 +142,7 @@
                                 <option value="3">Italian</option>
                                 <option value="3">Spanish</option>
                               </select>
-                              <small class="invalid-feedback" id="errorLanguage"></small>
+                              <div class="invalid-feedback"></div>
                             </div>
 
                             <button type="submit" class="btn btn-primary" id="btnSend">Submit</button> 
@@ -170,7 +169,6 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signIn" >Log in</button>
                             </div>
                         </div>
                     </div>
@@ -238,8 +236,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- <script src="validate-login.js"></script> -->
     <script src="custom.js"></script>
-    <!-- <script src="validate-signup.js"></script> -->
   </body>
 </html>

@@ -49,5 +49,5 @@ span.active ~ span:before {
    content: "\263B";
    position: absolute;
    left: 1em; 
-   color: rgb(255, 0, 212);
+   color: rgb(255, 0, 212); 
 }
