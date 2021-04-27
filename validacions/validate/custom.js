@@ -7,6 +7,14 @@ const pass = document.getElementById("inputPass");
 const pass2 = document.getElementById("inputPassVal");
 const language = document.getElementById("inputLanguage");
 const btn = document.getElementById("btnSend");
+//Log in form
+const form = document.getElementById("login");
+const email1 = document.getElementById("email");
+const password = document.getElementById("password");
+//Database
+let users = [];
+
+
 
 //Show input error message
 function ShowError(input, message) {
@@ -36,15 +44,20 @@ function CheckEmail(input) {
 
 //Required
 function CheckRequired(input) {
+  var validation = true;
   input.forEach(function(el){
     if (el.value.trim() === "") {
       ShowError(el, `This field is required`);
+      validation = false;
     } else {
       ShowSuccess(el);  
-      return true;
     }
   });
+  if(validation) {
+    return true;
+  }
 }
+
 //Length
 function CheckLenght(input, min, max) {
   if (input.value.length < min) {
@@ -56,14 +69,76 @@ function CheckLenght(input, min, max) {
     return true;
   }
 }
+
 //Password Match
 function CheckPasswordsMatch(input1,input2) {
   if (input1.value !== input2.value) {
     ShowError(input2, "Passwords do not match");
+  } else {
+    return true;
   }
 }
 
-//sign up submit
+//Database
+function addUser() {
+    let user = {
+        name: inputName.value,
+        surname: inputSurname.value,
+        email: inputEmail.value,
+        password:inputPass.value,
+        language: inputLanguage.value,
+    }
+    //check if email is valid
+    users.push(user);
+    signup.reset(); // to clear the form for the next entires
+    console.warn('added', {users});
+
+    //saving to localStorage
+    localStorage.setItem('Registered', JSON.stringify(users))
+}
+
+//modal
+function openModal() {
+  backdrop.style.display = "block"
+  exampleModal.style.display = "block"
+  exampleModal.className += "show"
+}
+
+function closeModal() {
+  backdrop.style.display = "none"
+  exampleModal.style.display = "none"
+  exampleModal.className += exampleModal.className.replace("show", "")
+}
+
+// Get the modal
+const modal = document.getElementById('exampleModal');
+window.onclick = function (event) {
+  if (event.target == modal) {
+      closeModal()
+  }
+}
+
+//Show details in modal
+function details(value) {
+  modalBody.innerHTML = `<p> Name: ${value.name} </p>
+                        <p> Surname: ${value.surname} </p>
+                        <p> Email: ${value.email} </p>`
+  openModal();
+}
+
+//Check if user is registered 
+function checkUsers(users, email) {
+  return users.filter(user => {
+    if (user.email === email.value) {
+      details(user);
+    }  else {
+      alert("please sign up");
+    }
+  })  
+}
+
+
+//Sign up submit
 form2.addEventListener('submit', function(e){
   e.preventDefault();
 
@@ -76,88 +151,17 @@ form2.addEventListener('submit', function(e){
   
 });
 
-
-//modal
-const openModal = function() {
-  document.getElementById("backdrop").style.display = "block"
-  document.getElementById("exampleModal").style.display = "block"
-  document.getElementById("exampleModal").className += "show"
-}
-
-function closeModal() {
-  document.getElementById("backdrop").style.display = "none"
-  document.getElementById("exampleModal").style.display = "none"
-  document.getElementById("exampleModal").className += document.getElementById("exampleModal").className.replace("show", "")
-}
-// Get the modal
-const modal = document.getElementById('exampleModal');
-window.onclick = function (event) {
-  if (event.target == modal) {
-      closeModal()
-  }
-}
-
-function results() {
-  const modal = document.getElementById('exampleModal');
-  const modalBody = modal.querySelector('.modal-body');
-
-  modalBody.innerHTML = `Welcome`
-  
-  openModal();
-}
-
-
-//Database
-let users = [];
-const addUser = function() {
-    let user = {
-        name: document.getElementById('inputName').value,
-        surname: document.getElementById('inputSurname').value,
-        email: document.getElementById('inputEmail').value,
-        password:document.getElementById('inputPass').value,
-        language: document.getElementById('inputLanguage').value,
-    }
-//check if email is valid
-users.push(user);
-document.getElementById('signup').reset(); // to clear the form for the next entires
-console.warn('added', {users});
-
-//saving to localStorage
-localStorage.setItem('Registered', JSON.stringify(users))
-}
-
-//Log in form
-const form = document.getElementById("login");
-const email1 = document.getElementById("email");
-const password = document.getElementById("password");
-
-
-const filteredUsers = users.filter(user => {
-  let loggedInUser = email1.value
-  return user.email === loggedInUser
-})
-  
-
-console.log(filteredUsers)
-
-
-function checkFilteredUsers() {
-    if (filteredUsers) {
-      // alert('welcome');
-    } else {
-      alert("please sign up");
-    }
-}
-
-
 //Log in submit
 form.addEventListener('submit', function(e){
   e.preventDefault();
 
   CheckRequired([ email1, password ]);
-  CheckEmail(email);
+  CheckEmail(email1);
   CheckLenght(password, 8, 25);
-  checkFilteredUsers();
+
+  if(CheckRequired([ email1, password]) && CheckEmail(email1) ) {
+    checkUsers(users, email1);
+  } 
 });
 
 
