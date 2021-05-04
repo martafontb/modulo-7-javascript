@@ -98,26 +98,45 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form id="signup">
+                          <form id="signup">   
                             <div class="mb-3">
                               <label for="inputName" class="form-label">First Name</label>
-                              <input type="text" class="form-control" id="inputName" placeholder="Enter your first name" aria-describedby="nameHelp">
+                              <input type="text" 
+                              class="form-control" 
+                              id="inputName" 
+                              placeholder="Enter your first name" 
+                              aria-describedby="nameHelp">
                               <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputSurname" class="form-label">Surname</label>
-                              <input type="text" class="form-control" id="inputSurname" placeholder="Enter your surname" aria-describedby="surnameHelp">
+                              <input type="text" 
+                              class="form-control" 
+                              id="inputSurname" 
+                              placeholder="Enter your surname" 
+                              aria-describedby="surnameHelp">
                               <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputEmail" class="form-label">Email address</label>
-                              <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email address" aria-describedby="emailHelp">
+                              <input type="email" 
+                              class="form-control" 
+                              id="inputEmail" 
+                              placeholder="Enter your email address" 
+                              aria-describedby="emailHelp"
+                              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                               <div class="invalid-feedback"></div>
                             </div>
                             <div class="mb-3">
                               <label for="inputPass" class="form-label">Password</label>
-                              <input type="password" id="inputPass" class="form-control" placeholder="Enter your password" aria-describedby="passwordHelpBlock">
+                              <input type="password" 
+                              id="inputPass" 
+                              class="form-control" 
+                              placeholder="Enter your password" 
+                              aria-describedby="passwordHelpBlock"
+            
+                              >
                               <div id="passwordHelpBlock" class="form-text">
                                 Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                               </div>
@@ -130,10 +149,9 @@
                                       data-bv-identical="true"
                                       data-bv-identical-field="password"
                                       placeholder="Repeat password"
-                                      data-bv-identical-message="The password and its confirm are not the same"/>
-                            </div>
+                                       />   
                             <div class="invalid-feedback"></div>
-
+                          </div>
                             <div class="mb-3">
                               <label for="form-select" class="form-label">Language</label>
                               <select class="form-select" aria-label="select example" id="inputLanguage">
@@ -238,5 +256,6 @@
     -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script src="formulario.js"></script>
+    <!-- <script src="validation.js"></script> -->
   </body>
 </html>

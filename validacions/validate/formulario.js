@@ -1,20 +1,28 @@
 //Sign up form
-const form2 = document.getElementById("signup");
-const fullName = document.getElementById("inputName");
-const surname = document.getElementById("inputSurname");
-const email = document.getElementById("inputEmail");
-const pass = document.getElementById("inputPass");
-const pass2 = document.getElementById("inputPassVal");
-const language = document.getElementById("inputLanguage");
+const nameEl = document.getElementById("inputName");
+const surnameEl = document.getElementById("inputSurname");
+const emailEl = document.getElementById("inputEmail");
+const passwordEl = document.getElementById("inputPass");
+const confirmPasswordEl = document.getElementById("inputPassVal");
+const languageEl = document.getElementById("inputLanguage");
 const btn = document.getElementById("btnSend");
+
+const form2 = document.getElementById("signup");
+
 //Log in form
-const form = document.getElementById("login");
-const email1 = document.getElementById("email");
+const email = document.getElementById("email");
 const password = document.getElementById("password");
+
+const form = document.getElementById("login");
+
 //Database
 let users = [];
 
-
+inputName.addEventListener('blur', ValidateString, false);
+inputSurname.addEventListener('blur', ValidateString, false);
+inputEmail.addEventListener('blur', CheckEmail, false);
+inputPass.addEventListener('blur', CheckLenght, false);
+inputPassVal.addEventListener('blur', CheckPasswordsMatch, false);
 
 //Show input error message
 function ShowError(input, message) {
@@ -23,6 +31,7 @@ function ShowError(input, message) {
 
   const errors = document.querySelectorAll('.invalid-feedback');
   errors.forEach( error => error.innerHTML = message)
+
 }
 
 //Show input success
@@ -31,19 +40,53 @@ function ShowSuccess(input) {
   formControl.className = "form-control is-valid";
 }
 
-//Check email
-function CheckEmail(input) {
-  const char = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (char.test(input.value.trim())) {
-    ShowSuccess(input);
-    return true;
-  }else {
-    ShowError(input, "Email is not valid");
+function ValidateString(e){
+  let valid = false;
+  const letters = /^[a-z]*$/i;
+  if(e.target.value === undefined) {
+    for(i = 0; i < e.target.length; i++) {
+      if( e.target[i].id === "inputName" || e.target[i].id === "email"){
+        console.log(e.target)
+        valid = true;
+      } 
+    }
+   } 
+   else {
+    if (!e.target.value.match(letters)) {
+      ShowError(e.target, `Please input letters only`);
+    } else {
+      ShowSuccess(e.target);
+      valid = true;
+    }
   }
+  return valid;
+}
+
+//Check email
+function CheckEmail(e) {
+  let valid = false;
+  const char = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(e.target.value === undefined) {
+    for(i = 0; i < e.target.length; i++) {
+      if( e.target[i].id === "inputEmail" || e.target[i].id === "email" ){
+        ShowSuccess(e.target)
+        valid = true;
+      } 
+    }
+  } else {
+    if (char.test(e.target.value.trim())) {
+      ShowSuccess(e.target)
+      valid = true;
+    }else {
+      ShowError(e.target, `Email is not valid`);
+    }
+  }
+  return valid;
 }
 
 //Required
 function CheckRequired(input) {
+  let valid = false;
   var validation = true;
   input.forEach(function(el){
     if (el.value.trim() === "") {
@@ -51,32 +94,61 @@ function CheckRequired(input) {
       validation = false;
     } else {
       ShowSuccess(el);  
+      valid = true;
     }
   });
   if(validation) {
-    return true;
+    valid = true;
   }
+  return valid;
 }
 
 //Length
-function CheckLenght(input, min, max) {
-  if (input.value.length < min) {
-    ShowError(input, `This field is required`);
-  }else if(input.value.length > max){
-    ShowError(input, `field must be less then ${max} characters`);
-  }else {
-    ShowSuccess(input);
-    return true;
+function CheckLenght(e) {
+  let valid = false;
+  if(e.target.value === undefined) {
+    for(i = 0; i < e.target.length; i++) {
+      if( e.target[i].id === "inputPass" || e.target[i].id === "inputPassVal" || e.target[i].id === "password"){
+        ShowSuccess(e.target)
+        valid = true;
+      } 
+    }
+  } else {
+    if (e.target.value.length < 8) {
+      ShowError(e.target, `field must be at least 8 characters`);
+    }else if(e.target.value.length > 20){
+      ShowError(e.target, `field must be less then 20 characters`);
+    }else {
+      ShowSuccess(e.target);
+      valid = true;
+    }
   }
+  return valid;
 }
 
 //Password Match
-function CheckPasswordsMatch(input1,input2) {
-  if (input1.value !== input2.value) {
-    ShowError(input2, "Passwords do not match");
+function CheckPasswordsMatch(e) {
+  let valid = false;
+  if(e.target.value === undefined) {
+    for(i = 0; i < e.target.length; i++) {
+      if( e.target[i].id === "inputPass" || e.target[i].id === "inputPassVal"){
+        if(e.target[i].value !== e.target[i].value) {
+          ShowError(e.target, `Passwords do not match`);
+        } else {
+          ShowSuccess(e.target);
+          valid = true;
+        }
+      } 
+    }
   } else {
-    return true;
+    if(e.target.form[3].value !== e.target.form[4].value){
+      ShowError(e.target, `Passwords do not match`);
+    } else {
+      ShowSuccess(e.target);
+      valid = true;
+      }
   }
+  return valid;
 }
 
 //Database
@@ -138,30 +210,52 @@ function checkUsers(users, email) {
 }
 
 
-//Sign up submit
-form2.addEventListener('submit', function(e){
+form2.addEventListener('submit', function (e) {
+  // prevent the form from submitting
   e.preventDefault();
 
-  CheckEmail(email);
-  CheckLenght(pass, 8, 25);
-  CheckPasswordsMatch(pass, pass2); 
-  if(CheckRequired([fullName, surname, email, pass, pass2, language]) && CheckEmail(email) && CheckPasswordsMatch(pass, pass2) ) {
-    addUser()
-  } 
-  
+  // validate forms
+  let isRequiredValid = CheckRequired([nameEl, surnameEl, emailEl, passwordEl, confirmPasswordEl, languageEl]),
+      isStringValid = ValidateString(e);
+      isEmailValid = CheckEmail(e),
+      isPasswordValid = CheckLenght(e),
+      isConfirmPasswordValid = CheckPasswordsMatch(e); 
+
+  let isFormValid = isRequiredValid  &&
+      isStringValid &&
+      isEmailValid &&
+      isPasswordValid &&
+      isConfirmPasswordValid;
+
+  // submit to the server if the form is valid
+  if (isFormValid) {
+    addUser();
+    alert('thanks for registering')
+  } else {
+    alert('please sign up')
+  }
 });
+
 
 //Log in submit
 form.addEventListener('submit', function(e){
   e.preventDefault();
 
-  CheckRequired([ email1, password ]);
-  CheckEmail(email1);
-  CheckLenght(password, 8, 25);
+ // validate forms
+  let isRequiredValid = CheckRequired([ email, password ]),
+  isEmailValid = CheckEmail(e),
+  isPasswordValid = CheckLenght(e);
 
-  if(CheckRequired([ email1, password]) && CheckEmail(email1) ) {
-    checkUsers(users, email1);
-  } 
+  let isUserValid = isRequiredValid &&
+  isEmailValid &&
+  isPasswordValid;
+
+  if(isUserValid) {
+    checkUsers(users, email);
+  } else {
+    alert ('user not found please sign up')
+  }
+
 });
 
 
