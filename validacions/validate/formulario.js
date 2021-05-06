@@ -23,6 +23,8 @@ inputSurname.addEventListener('blur', ValidateString, false);
 inputEmail.addEventListener('blur', CheckEmail, false);
 inputPass.addEventListener('blur', CheckLenght, false);
 inputPassVal.addEventListener('blur', CheckPasswordsMatch, false);
+email.addEventListener('blur', CheckEmail, false);
+password.addEventListener('blur', CheckLenght, false);
 
 //Show input error message
 function ShowError(input, message) {
@@ -203,7 +205,9 @@ function checkUsers(users, email) {
   return users.filter(user => {
     if (user.email === email.value) {
       details(user);
-    }  else {
+    } else if( user.email === '') {
+      alert("please sign up");
+    } else {
       alert("please sign up");
     }
   })  
@@ -230,9 +234,8 @@ form2.addEventListener('submit', function (e) {
   // submit to the server if the form is valid
   if (isFormValid) {
     addUser();
-    alert('thanks for registering')
   } else {
-    alert('please sign up')
+    alert('please create an account')
   }
 });
 
@@ -253,9 +256,8 @@ form.addEventListener('submit', function(e){
   if(isUserValid) {
     checkUsers(users, email);
   } else {
-    alert ('user not found please sign up')
+    alert ('user not found - please sign up')
   }
-
 });
 
 

@@ -69,9 +69,10 @@ footer button {
 	background: #cb93ff !important;
 }
 
-.success, .error {
+div#notification {
 	padding: 5px;
 	margin: 5px 0 15px 0;
+	height: 30px;
 }
 
 .success {
@@ -82,4 +83,3 @@ footer button {
 	background:var(--danger-color)!important;
 	color: var(--danger-text-color)!important;
 }
-

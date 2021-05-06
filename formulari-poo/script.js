@@ -14,7 +14,6 @@ class UI {
         const list = document.getElementById('product-list');
         const row = document.createElement('tr');
         row.innerHTML = `
-        
         <td>${product.name}</td>
         <td>${product.price}</td>
         <td>${product.year}</td>
@@ -24,8 +23,6 @@ class UI {
         console.log(product) 
         }
         
-      
-
 
     deleteProduct(target){
         if(target.className === 'delete'){
@@ -37,23 +34,18 @@ class UI {
     showNotification(message, className) {
 
         //create notification
-        const div = document.createElement('div');
+        const div = document.getElementById('notification');
+        
         //add message to div
         div.appendChild(document.createTextNode(message));
         
         //add dynamic class
         div.className = `alert ${className}`;
 
-        //get elements
-        const container = document.querySelector('.container');
-        const form = document.querySelector('#product-form')
-        
-        //insert notification
-        container.insertBefore(div, form);
-
-        //setTimeout
+        setTimeout
         setTimeout(function(){
-            document.querySelector('.alert').remove();
+            document.querySelector('.alert').innerHTML = "";
+            document.querySelector('.alert').classList.remove('success','error');
         },3000)
 
     }
@@ -64,6 +56,33 @@ class UI {
         document.getElementById('year').value = '';
     }
 }
+
+
+//Validate Product
+class ValidProduct {
+
+    productList = [];
+    //comprobar que no existe 
+    //foreach con el nombre
+
+    static ProductExists(product) {
+        return productList.some(function(el) {
+          return el.product === product;
+        }); 
+      }
+      
+
+    static AddProduct(product) {
+        productList.push(product)
+        console.table(productList)
+    }
+
+    static Remove(product) {
+        //forEach del array y encontrar en que posicion esta el objeto con ese nombre
+        productList.splice(index, 1)
+    }
+}
+
 
 //Event Listening
 document.getElementById('product-form').addEventListener('submit', function(e){
@@ -79,6 +98,9 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     //Instantiate methods
     const ui = new UI();
 
+    //Instantiate valid
+    const valid = new ValidProduct();
+
     //Validate if inputs are not empty
     if (name === '' || price === '' || year === '') {
         //error notification
@@ -93,6 +115,9 @@ document.getElementById('product-form').addEventListener('submit', function(e){
         ui.clearFields();
     }
 
+    // productList.push(product)
+    // console.table(productList)
+
   e.preventDefault();
 })
 
@@ -104,4 +129,7 @@ document.getElementById('product-list').addEventListener('click', function(e){
     ui.deleteProduct(e.target);
     ui.showNotification('product deleted successfully', 'success');
     e.preventDefault();
-})
+    // ValidProduct.Remove(e.currentTarget.children[0].cells[0].innerHTML)
+
+});
+
